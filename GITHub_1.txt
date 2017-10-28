@@ -68,8 +68,12 @@ $ git add -A
 $ git commit -a -m "Adding srini2 srini 3 and srini1 modified"
 # Above commands for all the work saved in local repository, now we have to push local repository code into GitHub repository using bellow command.
 $ git push origin master
-
 ----
+# It shows the 1st line on every commit
+$ git log --oneline 
+# It shows the 1st line on every commit
+$ git log --oneline 1 (here you can give any number(if you have 100 commits, you want to show onely first 5, than you have give 5)) 
+
 
 # Create a new branch
 $ git branch <branch_name>
@@ -91,14 +95,26 @@ Switched to branch 'srinibranch1'
 # push branch to github account (now this branch name will be display in github account, 
   but this branch files are not merged into master)
 $ git push origin "branchname"
-$ git push -u origin "branchname"
+
+# -u means Consider all the branches and everything push to repository
+$ git push -u --all
 
 # Push all local branches to remote repository
 $ git push --all
 
 
-# merge new branch in master OR Merge changes into current branch
+# merge new branch in master OR Merge changes into current branch - here merge all the files
 $ git merge <branch_name>
+$ git merge <source_branch> <destination_branch>
+
+# If you want merge only particular commit (cherry-picking simply means picking a commit from a branch and applying that commit onto another branch.)
+$ git cherry-pick sha1sum
+
+# Merge conflict: Test.txt in maser branch and fut1 branch. One developer working in master branch 2nd developer working on fut1 branch. Both are added some lines in test.txt and 
+  try to commit than it will give the conflicts. That time we manually go to the file & modify the lines. Then add that file in staging are & commit that. 
+- Modify conflict file
+  $git add <file>
+  $git commit -m “msg”
 
 -----
 17) Crate ssh key
@@ -121,37 +137,17 @@ Administrator@SRINIEIS MINGW64 /f/DevOpsClass1/GITHubProj (master)
 $ ssh -T git@github.com
 -----
 
-# revert back to previous versions, create new file add some text to “rever.txt”   
-Administrator@SRINIEIS MINGW64 /f/DevOpsClass1/GITHubProj (master)
-$ git add revert.txt
-Administrator@SRINIEIS MINGW64 /f/DevOpsClass1/GITHubProj (master)
-$ git commit -m "revert comm"
+# revert back to previous versions in all files, create new file add some text to “rever.txt” (it must be in staging area,)  
 
-# go to  “rever.txt”    add some text and commit the code 
-Administrator@SRINIEIS MINGW64 /f/DevOpsClass1/GITHubProj (master)
-$ git commit -a -m "revert comm modified 2nd time"
-Go to 
-$ git log
-Copy 1st 8 letters of commit version “0161e07f” (this is 1st committed version)
+$git reset <file>  => revert uncommitted changes
+$git reset --soft  => Move only HEAD pointer
+$git reset --mixed => Move the HEAD pointer & reset the staging area 
+$git reset --hard  => Move the HEAD pointer, reset the staging area and working tree to the new head 
 
-(commit 8602397fd71080f2c43e8119b7b22dcafa540639 (HEAD -> master)
-Author: srini <srini@gmail.com>
-Date:   Thu Jun 22 15:24:02 2017 +0530
-
-    revert comm modified 2nd time
-
-commit 0161e07f8bd5ec626e258ef99c2b7b38562e8997
-Author: srini <srini@gmail.com>
-Date:   Thu Jun 22 15:20:23 2017 +0530
-
-    revert comm )
-Administrator@SRINIEIS MINGW64 /f/DevOpsClass1/GITHubProj (master)
-$ git checkout 0161e07f revert.txt
-
-$ git checkout --revert.txt
+#if you want to reset one file
+$ git checkout HEAD -- test1.txt
 
 -----------------
-
 
 # Adding a remote repository with the name of beanstalk
 $ git remote add origin git@account_name.git.beanstalkapp.com:/acccount_name/repository_name.git
@@ -163,6 +159,20 @@ origin git@account_name.git.beanstalkapp.com:/acccount_name/repository_name.git 
 
 # remove file 
 $ git rm Readme.txt
+
+- If I add one line in file1 and file2 (files must added to local repository)after immediately used $stash than it will back up the current file and undo the current changes.
+- here i used stash 3 times
+$ git stash
+
+- get the backup list
+$ git stash list
+stash@{0}: WIP on master: 1845dae Initial commit
+stash@{1}: WIP on master: 1845dae Initial commit
+stash@{2}: WIP on master: 1845dae Initial commit
+- pick one backup from that (latest backup is stash@{0}) - Still all the backup there only if you pick any one also - it never delete backup  
+$ git stash apply stash@{1} 
+- clear all the backup
+$ git stash clear
 
 # Store current work with untracked files
 $ git stash -u
@@ -265,8 +275,8 @@ $ git tag --delete v1.0 (delete tags from local)
 $ git push origin -d v1.0 (to delete tags from remote)
 $ git push origin -delete v1.0 (to delete tags from remote)
 $ git push origin :v1.0 (to delete tags from remote)
-# cherry-picking simply means picking a commit from a branch and applying that commit onto another branch.
-$ git cherry-pick sha1sum
+
+
 
 # 
 $ git reflog
