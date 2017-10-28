@@ -1,0 +1,42 @@
+#
+# Cookbook Name:: LeadApp
+# Recipe:: default
+#
+# Copyright 2017, YOUR_COMPANY_NAME
+#
+# All rights reserved - Do Not Redistribute
+#
+node.default['java']['jdk_version'] = '7'
+include_recipe 'java'
+
+execute 'check the java version' do
+        command 'java -version'
+end
+
+execute 'stop tomcat' do
+        command "sh /home/vagrant/apache-tomcat-7.0.78/bin/shutdown.sh"
+end
+
+execute 'remove existing tomcat' do
+        command "rm -Rf /home/vagrant/apache-tomcat-7.0.78"
+end
+
+execute 'download tomcat 7' do
+        command "if [ ! -f /home/vagrant/apache-tomcat-7.0.78.tar.gz ]; then wget http://www-us.apache.org/dist/tomcat/tomcat-7/v7.0.78/bin/apache-tomcat-7.0.78.tar.gz -P /home/vagrant; fi"
+end
+
+execute 'extract timcat' do
+        command "if [ ! -f /home/vagrant/apache-tomcat-7.0.78 ]; then tar -zxvf /home/vagrant/apache-tomcat-7.0.78.tar.gz -C /home/vagrant; fi"
+end
+execute 'deploy app war' do
+        command "wget http://192.168.33.16:8080/job/leadapp/lastSuccessfulBuild/artifact/dist/lib/leadapp.war -P /home/vagrant/apache-tomcat-7.0.78/webapps"
+end
+
+execute 'delay' do
+  command 'sleep 30'
+end
+
+execute 'start the tomcat' do
+
+        command "sh /home/vagrant/apache-tomcat-7.0.78/bin/startup.sh"
+end

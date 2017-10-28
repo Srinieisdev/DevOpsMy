@@ -1,0 +1,243 @@
+1)Ex:
+<project name="Hello World Project" default="deploy">
+<target name="deploy" depends="package">
+  ....
+</target>
+
+<target name="package" depends="clean,compile">
+  ....
+</target>
+
+<target name="clean" >
+  ....
+</target>
+
+<target name="compile" >
+  ....
+</target>
+</project>
+
+2)Ex: property name
+<project name="Hello World Project" default="info">
+   <property name="sitename" value="www.tutorialspoint.com"/>
+   <target name="info">
+      <echo>Apache Ant version is ${ant.version} - You are at ${sitename} </echo>
+   </target>
+</project>
+3) Ex: property file
+<project name="Hello World Project" default="info">
+   <property file="build.properties"/>
+   <target name="info">
+      <echo>Apache Ant version is ${ant.version} - You are at ${sitename} </echo>
+   </target>
+</project>
+4) Ex: 
+<fileset dir="${src}" casesensitive="yes">
+   <include name="**/*.java"/>
+   <exclude name="**/*Stub*"/>
+</fileset>
+5) Ex:
+<patternset id="java.files.without.stubs">
+   <include name="src/**/*.java"/>
+   <exclude name="src/**/*Stub*"/>
+</patternset>
+6) Ex: 
+<fileset dir="${src}" casesensitive="yes">
+   <patternset refid="java.files.without.stubs"/>
+</fileset>
+7) Ex:
+<filelist id="config.files" dir="${webapp.src.folder}">
+   <file name="applicationConfig.xml"/>
+   <file name="faces-config.xml"/>
+   <file name="web.xml"/>
+   <file name="portlet.xml"/>
+</filelist>
+8) Ex:
+<copy todir="${output.dir}">
+   <fileset dir="${releasenotes.dir}" includes="**/*.txt"/>
+   <filterset>
+      <filter token="VERSION" value="${current.version}"/>
+   </filterset>
+</copy>
+9) Ex:
+<path id="build.classpath.jar">
+   <pathelement path="${env.J2EE_HOME}/${j2ee.jar}"/>
+   <fileset dir="lib">
+      <include name="**/*.jar"/>
+   </fileset>
+</path>
+10) Ex: Buils java Project
+<project name="fax" basedir="." default="build">
+   <property name="src.dir" value="src"/>
+   <property name="web.dir" value="war"/>
+   <property name="build.dir" value="${web.dir}/WEB-INF/classes"/>
+   <property name="name" value="fax"/>
+
+   <path id="master-classpath">
+      <fileset dir="${web.dir}/WEB-INF/lib">
+         <include name="*.jar"/>
+      </fileset>
+      <pathelement path="${build.dir}"/>
+   </path>
+
+   <target name="build" description="Compile source tree java files">
+      <mkdir dir="${build.dir}"/>
+      <javac destdir="${build.dir}" source="1.5" target="1.5">
+         <src path="${src.dir}"/>
+         <classpath refid="master-classpath"/>
+      </javac>
+   </target>
+ 
+   <target name="clean" description="Clean output directories">
+      <delete>
+         <fileset dir="${build.dir}">
+            <include name="**/*.class"/>
+         </fileset>
+      </delete>
+   </target>
+</project>
+11) Ex: Documentation is a must in any project. Documentation plays a great role in the maintenance of a project. Java makes documentation easier by the use of the in-built javadoc tool. Ant makes it even easier by generating the documentation on demand.
+<target name = "generate-javadoc">
+   <javadoc packagenames="faxapp.*" sourcepath="${src.dir}" 
+      destdir = "doc" version = "true" windowtitle = "Fax Application">
+      
+      <doctitle><![CDATA[= Fax Application =]]></doctitle>
+      
+      <bottom>
+         <![CDATA[Copyright © 2011. All Rights Reserved.]]>
+      </bottom>
+      
+      <group title = "util packages" packages = "faxapp.util.*"/>
+      <group title = "web packages" packages = "faxapp.web.*"/>
+      <group title = "data packages" packages = "faxapp.entity.*:faxapp.dao.*"/>
+   </javadoc>
+   
+   <echo message = "java doc has been generated!" />
+</target>
+12) Ex: build the .jar file
+<target name="build-jar">
+   <jar destfile="${web.dir}/lib/util.jar"
+      basedir="${build.dir}/classes"
+      includes="faxapp/util/**"
+      excludes="**/Test.class">
+
+      <manifest>
+         <attribute name="Main-Class" value="com.tutorialspoint.util.FaxUtil"/>
+      </manifest>
+
+   </jar>
+</target>
+13) Ex: Create WAR
+<target name="build-war">
+
+   <war destfile="fax.war" webxml="${web.dir}/web.xml">
+      <fileset dir="${web.dir}/WebContent">
+         <include name="**/*.*"/>
+      </fileset>
+      
+      <lib dir="thirdpartyjars">
+         <exclude name="portlet.jar"/>
+      </lib>
+      
+      <classes dir="${build.dir}/web"/>
+   </war>
+   
+</target>
+14) Ex: 
+<project name = "fax" basedir = "." default = "usage">
+
+   <property file = "build.properties"/>
+   <property name = "src.dir" value = "src"/>
+   <property name = "web.dir" value = "war"/>
+   <property name = "javadoc.dir" value = "doc"/>
+   <property name = "build.dir" value = "${web.dir}/WEB-INF/classes"/>
+   <property name = "name" value = "fax"/>
+
+   <path id = "master-classpath">
+      <fileset dir = "${web.dir}/WEB-INF/lib">
+         <include name = "*.jar"/>
+      </fileset>
+      <pathelement path = "${build.dir}"/>
+   </path>
+    
+   <target name = "javadoc">
+      <javadoc packagenames = "faxapp.*" sourcepath = "${src.dir}" 
+         destdir = "doc" version = "true" windowtitle = "Fax Application">
+         
+         <doctitle><![CDATA[<h1> =  Fax Application  = </h1>]]>
+         </doctitle>
+
+         <bottom><![CDATA[Copyright © 2011. All Rights Reserved.]]>
+         </bottom>
+
+         <group title = "util packages" packages = "faxapp.util.*"/>
+         <group title = "web packages" packages = "faxapp.web.*"/> 
+         <group title = "data packages" packages = "faxapp.entity.*:faxapp.dao.*"/>
+      </javadoc>
+   </target>
+
+   <target name = "usage">
+      <echo message = ""/>
+      <echo message = "${name} build file"/>
+      <echo message = "-----------------------------------"/>
+      <echo message = ""/>
+      <echo message = "Available targets are:"/>
+      <echo message = ""/>
+      <echo message = "deploy    --> Deploy application as directory"/>
+      <echo message = "deploywar --> Deploy application as a WAR file"/>
+      <echo message = ""/>
+   </target>
+
+   <target name = "build" description = "Compile main source tree java files">
+      <mkdir dir = "${build.dir}"/>
+      
+      <javac destdir = "${build.dir}" source = "1.5" target = "1.5" debug = "true"
+         deprecation = "false" optimize = "false" failonerror = "true">
+         
+         <src path = "${src.dir}"/>
+         <classpath refid = "master-classpath"/>
+         
+      </javac>
+   </target>
+
+
+   <target name = "deploy" depends = "build" description = "Deploy application">
+      <copy todir = "${deploy.path}/${name}" preservelastmodified = "true">
+
+         <fileset dir = "${web.dir}">
+            <include name = "**/*.*"/>
+         </fileset>
+
+      </copy>
+   </target>
+
+
+   <target name = "deploywar" depends = "build" description = "Deploy application as a WAR file">
+   
+      <war destfile = "${name}.war" webxml = "${web.dir}/WEB-INF/web.xml">
+         <fileset dir = "${web.dir}">
+            <include name = "**/*.*"/>
+         </fileset>
+      </war>
+      
+      <copy todir = "${deploy.path}" preservelastmodified = "true">
+         <fileset dir = ".">
+            <include name = "*.war"/>
+         </fileset>
+      </copy>
+      
+   </target>
+    
+   <target name = "clean" description = "Clean output directories">
+      <delete>
+         <fileset dir = "${build.dir}">
+            <include name = "**/*.class"/>
+         </fileset>
+      </delete>
+   </target>
+</project>
+
+15) Ex: Delete Directory
+<delete dir="${build.dir}"/>
+16) 
+

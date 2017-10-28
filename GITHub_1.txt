@@ -1,0 +1,284 @@
+-> GIT is the repository
+-> github is where the repository placed.
+-> Create users in github
+- create organisation
+- craete individual account for each one and invite into organisation.
+- give the permistions to them
+
+
+1) craete account in https://github.com/  
+2) Crate Repository in https://github.com/
+3) Click “Clone or Download” button “copy to clipboard” the URL
+3) Crate new folder in in any drive. Ex: F:/DevOpsClass1/GITHubProj
+4) Open GitBash in “F:/ DevOpsClass1/GITHubProj” path 
+5) Administrator@SRINIEIS MINGW64 /f/DevOpsClass1/GITHubProj
+
+# Create local repository
+$ git init
+$ git remote add origin git@account_name.git.beanstalkapp.com:/acccount_name/repository_name.git
+-----
+OR
+git clone git@account_name.git.beanstalkapp.com:/acccount_name/repository_name.git   
+-----
+
+#Now get
+Administrator@SRINIEIS MINGW64 /f/DevOpsClass1/GITHubProj (master)
+
+# Running git config globally
+$ git config --global user.email "my@emailaddress.com"
+$ git config --global user.name "Brian Kerr"
+
+# Running git config on the current repository settings
+$ git config user.email "my@emailaddress.com"
+$ git config user.name "Brian Kerr"
+-----
+
+
+
+-----
+#Crate new file (Srini.txt) add some text into that file, now check the status
+$ git status
+On branch master
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        Srini1.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+$ git add Srini1.txt
+-------
+    git add -A  -> stages All
+    git add .   -> stages new and modified, without deleted
+    git add -u  -> stages modified and deleted, without new
+
+-------
+
+$ git status
+On branch master
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        new file:   Srini1.txt
+
+$ git commit -m "Srini text file added"
+# Create multiple file in working area, use command for add multiple files (-a commit all uncommited files)
+$ git add -A
+$ git commit -a -m "Adding srini2 srini 3 and srini1 modified"
+# Above commands for all the work saved in local repository, now we have to push local repository code into GitHub repository using bellow command.
+$ git push origin master
+
+----
+
+# Create a new branch
+$ git branch <branch_name>
+
+# Checkout and create a new branch with that name
+$ git checkout -b <new_branch>
+
+# List all remote or local branches
+$ git branch -a
+
+# Delete a branch
+$ git branch -d <branch_name>
+
+# Checkout an existing branch
+$ git checkout <branch_name>
+$ git checkout srinibranch1
+Switched to branch 'srinibranch1'
+
+# push branch to github account (now this branch name will be display in github account, 
+  but this branch files are not merged into master)
+$ git push origin "branchname"
+$ git push -u origin "branchname"
+
+# Push all local branches to remote repository
+$ git push --all
+
+
+# merge new branch in master OR Merge changes into current branch
+$ git merge <branch_name>
+
+-----
+17) Crate ssh key
+Administrator@SRINIEIS MINGW64 /f/DevOpsClass1/GITHubProj (master)
+$ ssh-keygen
+Administrator@SRINIEIS MINGW64 /f/DevOpsClass1/GITHubProj (master)
+$ cat /c/Users/Administrator/.ssh/id_rsa.pub
+- Copy ssh key from console, go to your account in github.com, settings-> SSH and GPG keys -> new sshkey -> give title “ssh1” and paste coped ssh key from console 
+  and “add SSH key” button, activate ssh key from console using below command, after activate ssh key key icon changed it as green colour 
+
+Administrator@SRINIEIS MINGW64 /f/DevOpsClass1/GITHubProj (master)
+$ ssh -T git@github.com
+The authenticity of host 'github.com (192.30.253.113)' can't be established.
+RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
+Are you sure you want to continue connecting (yes/no)? y
+Please type 'yes' or 'no': yes
+Warning: Permanently added 'github.com,192.30.253.113' (RSA) to the list of known hosts.
+Hi SrinivasaRaoYS! You've successfully authenticated, but GitHub does not provide shell access
+Administrator@SRINIEIS MINGW64 /f/DevOpsClass1/GITHubProj (master)
+$ ssh -T git@github.com
+-----
+
+# revert back to previous versions, create new file add some text to “rever.txt”   
+Administrator@SRINIEIS MINGW64 /f/DevOpsClass1/GITHubProj (master)
+$ git add revert.txt
+Administrator@SRINIEIS MINGW64 /f/DevOpsClass1/GITHubProj (master)
+$ git commit -m "revert comm"
+
+# go to  “rever.txt”    add some text and commit the code 
+Administrator@SRINIEIS MINGW64 /f/DevOpsClass1/GITHubProj (master)
+$ git commit -a -m "revert comm modified 2nd time"
+Go to 
+$ git log
+Copy 1st 8 letters of commit version “0161e07f” (this is 1st committed version)
+
+(commit 8602397fd71080f2c43e8119b7b22dcafa540639 (HEAD -> master)
+Author: srini <srini@gmail.com>
+Date:   Thu Jun 22 15:24:02 2017 +0530
+
+    revert comm modified 2nd time
+
+commit 0161e07f8bd5ec626e258ef99c2b7b38562e8997
+Author: srini <srini@gmail.com>
+Date:   Thu Jun 22 15:20:23 2017 +0530
+
+    revert comm )
+Administrator@SRINIEIS MINGW64 /f/DevOpsClass1/GITHubProj (master)
+$ git checkout 0161e07f revert.txt
+
+$ git checkout --revert.txt
+
+-----------------
+
+
+# Adding a remote repository with the name of beanstalk
+$ git remote add origin git@account_name.git.beanstalkapp.com:/acccount_name/repository_name.git
+
+# List named remote repositories
+$ git remote -v
+origin git@account_name.git.beanstalkapp.com:/acccount_name/repository_name.git (fetch)
+origin git@account_name.git.beanstalkapp.com:/acccount_name/repository_name.git (push)
+
+# remove file 
+$ git rm Readme.txt
+
+# Store current work with untracked files
+$ git stash -u
+
+# Bring stashed work back to the working directory
+$ git stash pop
+
+git rm
+Remove files or directories from the working index (staging area). With git rm, there are two options to keep in mind: force and cached. Running the command with force deletes the file. 
+The cached command removes the file from the working index. When removing an entire directory, a recursive command is necessary.
+
+# To remove a file from the working index (cached):
+$ git rm --cached <file name>
+
+# To delete a file (force):
+$ git rm -f <file name>
+
+# To remove an entire directory from the working index (cached):
+$ git rm -r --cached <directory name>
+
+# To delete an entire directory (force):
+$ git rm -r -f <file name>
+
+# tag is the snapshot of the revison number
+$ git tag --list
+# Create Tag 
+$ git chekout -b <branch name> <tag name>
+$ git tag v0.1 (with out message (it Calls Lightweight tag))
+$ git tag -a v0.1 -m"this is my firest version" (with message(it Calls annotated tag ))
+$ git tag -a v0.2 -m"this is my 2nd version"
+$ git tag -a v0.3
+$ git tag --list
+v0.1
+v0.2
+v0.3
+v0.4
+# get particular tag details
+$ git show "v0.2"
+$ git show "v0.*"
+$ git log
+commit 0581bb33191d6ef783d342863dd11cd9743c0b08 (HEAD -> master, tag: v0.4, tag: v0.3, tag: v0.2, tag: v0.1, origin/master)
+Author: srini <srini@gmail.com>
+Date:   Thu Jun 29 09:46:10 2017 +0530
+
+    srini
+
+commit 2d6183bd4f020f5cc0a503ab34b903242d98a82b
+Author: srini <srini@gmail.com>
+Date:   Thu Jun 22 13:10:13 2017 +0530
+
+    Adding srini2 srini 3 and srini1 modified
+
+commit da6ccaf63a5c542416f78d1f4ec54483b5dd75c0
+Author: srini <srini@gmail.com>
+Date:   Thu Jun 22 12:57:14 2017 +0530
+
+    Srini text file added
+
+commit 631c302f3c2aa60e3397f45180aa85903784bb82
+Author: SrinivasaRaoYS <srinumails@gmail.com>
+Date:   Thu Jun 22 11:43:02 2017 +0530
+
+    Initial commit
+
+# Create new tag for alredy comited version
+$ git tag -a v0.5 2d6183bd
+$ git log
+commit 0581bb33191d6ef783d342863dd11cd9743c0b08 (HEAD -> master, tag: v0.4, tag: v0.3, tag: v0.2, tag: v0.1, origin/master)
+Author: srini <srini@gmail.com>
+Date:   Thu Jun 29 09:46:10 2017 +0530
+
+    srini
+
+commit 2d6183bd4f020f5cc0a503ab34b903242d98a82b (tag: v0.5)
+Author: srini <srini@gmail.com>
+Date:   Thu Jun 22 13:10:13 2017 +0530
+
+    Adding srini2 srini 3 and srini1 modified
+
+commit da6ccaf63a5c542416f78d1f4ec54483b5dd75c0
+Author: srini <srini@gmail.com>
+Date:   Thu Jun 22 12:57:14 2017 +0530
+
+    Srini text file added
+
+commit 631c302f3c2aa60e3397f45180aa85903784bb82
+Author: SrinivasaRaoYS <srinumails@gmail.com>
+Date:   Thu Jun 22 11:43:02 2017 +0530
+
+    Initial commit
+
+# push tags to remote
+$ git push origin v0.1
+$ git push origin --tags (to push all tags at once)
+$ git push --tags (to push all tags at once)
+
+# delete tags (if required only)
+$ git tag -d v1.0 (delete tags from local)
+$ git tag --delete v1.0 (delete tags from local)
+$ git push origin -d v1.0 (to delete tags from remote)
+$ git push origin -delete v1.0 (to delete tags from remote)
+$ git push origin :v1.0 (to delete tags from remote)
+# cherry-picking simply means picking a commit from a branch and applying that commit onto another branch.
+$ git cherry-pick sha1sum
+
+# 
+$ git reflog
+
+# git bisect 
+
+You could try to check out each commit, build it, check if the regression is present or not. If there is a large number of commits, 
+this can take a long time. This is a linear search. We can do better by doing a binary search. This is what the git bisect command does. 
+At each step it tries to reduce the number of revisions that are potentially bad by half.
+
+You'll use the command like this:
+
+$ git stash save
+$ git bisect start
+$ git bisect bad
+$ git bisect good 0

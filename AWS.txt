@@ -1,0 +1,87 @@
+Simple Storage service & Elastic block store
+- S3 is Object level storage 
+- S3 to used for WORM operations (Write once read many times)
+- Scalable, size not be planned
+- but, not suitable for hosting OS or DB
+
+- EBS is block storage
+- EBS works best as server disks
+- Persistance and high performance in terms of read and write
+- Replicated with in AZ and could be mounted to one EC2 in the same AZ
+
+Elasic File System
+- Could be mounted to multiple EC2 at the same time
+- Could be mounted to on premise server as well (over VPN ot DirectConnect)
+
+----------------------
+- Refuse the connection If try to connect to EC2 instance using SSH. It means Port 22 is not lessening from outside. 
+   Authenticate inbound rule in security group.Edit “source” is 0.0.0.0
+- Every reboot public IP will be change for instance. If we want to stick to one public IP than change it as Elastic IP. For assign this go to 
+  ‘Elastic IP’ under  “network & security”
+
+-------------------------------- AWS Tutorial _ AWS Certified Solutions Architect _ Amazon AWS _ AWS Training _ Edureka - YouTube (720p) -------------------------------------
+AWS compute services: 
+1) EC2: reusable compute capacity in cloud, which can be customised according to our need.
+2) Lambda: Execute background tasks, not for hosting an application.  
+3) Elastic beanstalk: Deploy application without worrying about the underlaying hardware. If we want to host java based website, 
+   we need to create java environment, just we have to select type of environment using Elastic beanstalk. Just upload your code everything will 
+   provide from Elastic beanstalk. It is automatic form in EC2. Some of the environments not provided in this, that time we will create environment 
+   in EC2 and upload code in that environment.  
+4) Elastic load Balancer: distribute the workload on the deployed instances. traffic is distributed to EC2 instances over multiple available zones, 
+   and dynamic addition and removal of Amazon EC2 hosts from the load-balancing rotation .It is protocol. It can dynamically grow and shrink 
+   the load-balancing  capacity to adjust to traffic demands and also support sticky sessions to address more advanced routing needs.
+5) Auto Scaling: scale up and down automatically 
+
+AWS Storage services:
+1) S3(simple storage service): Object oriented file system. First crate bucket (just like folder) in S3, now we can upload files into bucket 
+   in the form of object. 
+2) Cloudfront: content delivery network. it improves the performance
+3) Elastic Block Storage: Block level storage, provides high IOPS(IOPS are a unit of measure representing input/output operations per second). 
+   It is like hard drive to EC2. One EC2 instance connected to multiple EBS volumes,  but one EBS volume connect only one EC2 instance.
+4) Glacier: data archiving service. Offering low price storage. If we want to backup EC2 instance or any data not frequently access than 
+   we have to use glacier storage 
+5) Snowball: physical transfer of data to AWS infrastructure 
+6) Storage Gateway: Provide seamless integration between your on premise servers and the AWS infrastructure 
+
+AWS database services:
+1)RDS: Relational database management services. It manages MySQL, Oracle, Microsoft SQL etc.  
+2)Aurora (built by Amazon): based on MySQL, but better performance than MySQL. Same MySQL  
+3)DynamoDB: non-relational data base management service. Scaling this DB. We can store unstructured data in this DB. 
+4)ElastiCache: set up, manage and scale a distributed cache-in environment in the cloud. If user send the request to DB multiple times. 
+  Now ElastiCache store the result set and send back to user. Now request not connected the DB multiple times.   
+5) RedShift: fully managed petabyte-scale data warehouse service.
+- EC2 instance and DB instance in same VPC Security group 
+
+AWS networking services:
+- Internet gateway: it allows communication between instance in your VPC and the internet
+- Route table: RT contains a set of rules. The default VPC already has a main route table
+- Network access control List (NACL): For the default NACL all traffic is allowed (both in bound / out bound)
+- subnetwork :  
+1)VPC: Virtual private connection. It will communicate between the AWS services.  
+2)Direct Connect: use AWS leased line to connect to AWS infrastructure.
+3)Route 53: domain name system. If you give domain name in the URL. Route 53 will convert into actual public IP address. Redirect URL to IP address.
+
+AWS management services:
+1)CloudWatch: it is the monitoring tool
+2)CloudFormation: it is tool is used to templatize the AWS infrastructure. This means if we want launch same infrastructure in 
+  different environment like test, production. Than templatize the infrastructure and launch into another environment    
+3)CloudTrail: it is logging service. It will create logs. These logs will store into S3.
+4)CLI: AWS command line 
+5)OpsWorks: it is configuration management tool. It has 2 parts stack, layers. Layers means different AWS services. All the layers combined together
+  is called stack. If we need change the things in different layers no need to go into all levels. Change it in stack level than it will change 
+  modifications in all layers, when deploy use OpsWorks. 
+6)TrustedAdvisor: it is personal assistant
+7) routing table 
+8) network access control list 
+
+AWS security services:
+1) IAM (identification authentication management tool): It provides enhanced security and identity management for your AWS account
+2) KMS (create and manage encryption keys to encrypt your data)
+
+AWS application services:
+1) SES (simple email service): bulk email service  
+2) SQS (simple que service): queuing service which acts as a buffer (Ex: when we upload multiple images at a time, they have que in buffer, 
+   when one image completed, that image remove from que).   
+3) SNS (simple notification service): notification based on triggers.
+
+

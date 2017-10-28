@@ -1,0 +1,103 @@
+# Create general maven project from command prompt, Create 1 folder, open command prompt in that folder (Need internet connection)
+E:\DevopsTraining\Class2\Maven\Proj1\meetings>mvn archetype:generate
+# It will show one number for sample maven project 
+Ex:
+Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): 1002:
+Choose org.apache.maven.archetypes:maven-archetype-quickstart version:
+1: 1.0-alpha-1
+2: 1.0-alpha-2
+3: 1.0-alpha-3
+4: 1.0-alpha-4
+5: 1.0
+6: 1.1
+Choose a number: 6:
+
+# choose 6 and it will ask below:
+
+Define value for property 'groupId': com.eis.erp
+Define value for property 'artifactId': meetings
+Define value for property 'version' 1.0-SNAPSHOT: : 1.0
+Define value for property 'package' com.eis.erp: : src
+Confirm properties configuration:
+groupId: com.eis.erp
+artifactId: meetings
+version: 1.0
+package: src
+ Y: : Y
+
+# now build success downloaded sample project
+
+> mvn clean
+> mvn compile
+> mvn test
+> mvn test-compile
+# mvn install command to cretae jar file.
+> mvn install   
+
+-------------
+Default (or Build) Lifecycle
+•	validate - validate the project is correct and all necessary information is available
+•	compile - compile the source code of the project
+•	test - test the compiled source code using a suitable unit testing framework. These tests should not require the code be packaged or deployed
+•	package - take the compiled code and package it in its distributable format, such as a JAR.
+•	verify - run any checks on results of integration tests to ensure quality criteria are met
+•	install - install the package into the local repository, for use as a dependency in other projects locally
+•	deploy - done in the build environment, copies the final package to the remote repository for sharing with other developers and projects.
+
+Build Life Cycle of clean phase
+1.	mvn pre-clean
+2.	mvn clean
+3.	mvn post-clean
+Site Lifecycle (when we run >mvn site it will create document in /maven_home/project_name/target/site , here we can see created html files  )
+•	pre-site
+•	site    ()
+•	post-site
+•	site-deploy
+•	The command used in maven to generate javadocs for a given project is 'mvn site'. Basically, when this command is invoked, maven calls 'Doxia' document generation and other report generating plugins.
+•	Doxia is basically a framework used for content generation by maven. This generates contents both in static and dynamic ways.
+
+-----------------
+- It will adjust all pom versions, parent versions and dependency versions in a multi-module project.
+> mvn versions:set -DnewVersion=2.50.1-SNAPSHOT
+- If you made a mistake, do
+> mvn versions:revert
+- afterwards, or
+> mvn versions:commit
+- after that install
+
+How to call directly module
+> mvn clean -pl <module_name> 
+------------------
+Build Profile OR Maven Profile (https://www.tutorialspoint.com/maven/maven_build_profiles.htm)
+
+A Build profile is a set of configuration values, which can be used to set or override default values of Maven build. Using a build profile, 
+you can customize build for different environments such as Production v/s Development environments.
+Profiles are specified in pom.xml file using its activeProfiles/profiles elements and are triggered in variety of ways. 
+Profiles modify the POM at build time, and are used to give parameters different target environments 
+(for example, the path of the database server in the development, testing, and production environments).
+
+Build profiles are majorly of three types.
+
+Type 		- 	Where it is defined
+Per Project 	-	Defined in the project POM file, pom.xml
+Per User    	-	Defined in Maven settings xml file (%USER_HOME%/.m2/settings.xml)
+Global		-	Defined in Maven global settings xml file (%M2_HOME%/conf/settings.xml)
+
+A Maven Build Profile can be activated in various ways.
+
+    Explicitly using command console input.
+    Through maven settings.
+    Based on environment variables (User/System variables).
+    OS Settings (for example, Windows family).
+    Present/missing files.
+--------------
+Maven CLI Options
+-D,--define <arg>		= Define a system property
+-P,--activate-profiles <arg>	= Comma-delimited list of profiles to activate
+-o,--offline			= Work offline
+-f,--file <arg>			= Force the use of an alternate POM file (or directory with pom.xml).
+-s,--settings <arg>		= Alternate path for the user settings file
+-fn,--fail-never		= NEVER fail the build, regardless of project result
+-q,--quiet			= Quiet output - only show errors
+-X,--debug			= Produce execution debug output
+--------------------------

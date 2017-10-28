@@ -1,0 +1,90 @@
+1) Download “nexus-3.4.0-02-win64” file  from https://www.sonatype.com/download-oss-sonatype
+2) Unzip & paste “nexus-3.4.0-02”, “sonatype-work” two files in “program files”
+3) Open command prompt and go to C:\Program Files\nexus-3.4.0-02\bin path and run below commands
+4) Run nexus.exe /run 
+5) nexus.exe /install
+6) nexus.exe /start
+7) use link http://localhost:8081/ for access nexus, login "admin" / "admin123" with default usrname / password
+8) create new repository OR use already free defined repositories, take repository URL
+Ex: http://localhost:8081/repository/maven-releases/
+9) create settings.xml file in “C:\Users\Administrator\.m2” path (OR copy setting.xml file from “C:\Program Files\Apache Software Foundation\apache-maven-3.5.0\conf” path )
+10) use server tag in settings.xml in C:\Users\Administrator\.m2
+Ex: 
+<server>
+      <id>maven-snapshots</id>
+      <username>admin</username>
+      <password>admin123</password>
+    </server>
+	<server>
+      <id>maven-releases</id>
+      <username>admin</username>
+      <password>admin123</password>
+    </server>
+11) add “distributionManagement” tag in pom.xml file 
+Ex:
+<distributionManagement>
+	<snapshotRepository>
+         <id>maven-snapshots</id>
+        <name>plugins-snapshot</name>
+        <url>http://localhost:8081/repository/maven-snapshots/</url>
+    </snapshotRepository>
+	<repository>
+        <id>maven-releases</id>
+        <name>plugins-releases</name>
+        <url>http://localhost:8081/repository/maven-releases/</url>
+    </repository>
+    </distributionManagement>
+12) run “mvn deploy” then jars will pushed into nexus create repository
+--------------------------------------------------
+Installing Nexus OSS on Centos 7
+
+- Download and extract nexus
+$ wget http://download.sonatype.com/nexus/3/latest-unix.tar.gz
+$ sudo tar xvf latest-unix.tar.gz -C /opt
+$ sudo ln -s /opt/nexus-3.3.1-01/ /opt/nexus
+
+- Setup nexus user
+$ sudo adduser nexus
+$ sudo chown -R nexus:nexus /opt/nexus
+
+- Running as nexus user
+$ sudo vim /opt/nexus/bin/nexus.rc
+
+run_as_user="nexus"   
+:wq
+
+- Running nexus as Linux service
+$ sudo ln -s /opt/nexus/bin/nexus /etc/init.d/nexus
+$ sudo systemctl enable nexus
+nexus.service is not a native service, redirecting to /sbin/chkconfig.
+Executing /sbin/chkconfig nexus on
+
+- Starting nexus
+$ sudo systemctl start nexus
+fan noise...
+
+- Running behind reverse proxy
+$ vim /opt/sonatype-work/nexus3/etc/nexus.properties
+nexus-context-path=/nexus
+:wq
+
+- Add nexus.conf to existing /etc/httpd/conf.d. Here's what the file should contain.
+
+ProxyRequests Off
+ProxyPreserveHost On
+
+<VirtualHost 127.0.0.1:80>
+    ServerName centos.dev
+    ServerAdmin admin@centos.dev
+    ProxyPass /nexus http://localhost:8081/nexus
+    ProxyPassReverse /nexus http://localhost:8081/nexus
+    ErrorLog /var/log/nexus/error.log
+    CustomLog /var/log/nexus/access.log common
+</VirtualHost>
+
+
+
+
+  
+
+

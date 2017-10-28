@@ -1,0 +1,162 @@
+   ############## Instalation in Windows ################
+1) Download and install Jenkins using .exe file
+2) Run Jenkins service from windows services.
+3) Access Jenkins using http://localhost:8080/ link. Find and give 1st password from path “C:\Program Files (x86)\Jenkins\secrets\initialAdminPassword”
+
+
+############## Instalation in CentOS ################
+
+1) Install Java
+2) download jenkines.war
+# run  jenkins.war
+3)  java -jar jenkins.war
+5) it will run and give defalut password on screen like below 
+(Ex: Jenkins initial setup is required. An admin user has been created and a password generated. 
+Please use the following password to proceed to installation:
+ade1673adf784429b05747c5f33d6609)
+6) install reqired plugins & it will ask new user name & password
+
+
+
+############## Create Nodes (Slaves) ##################
+ 
+
+
+#################
+
+
+pipeline plugin
+	
+Role-based Authorization Strategy plug in (for manage user roles)
+
+-> Pipeline
+- Pipeline is a work flow with group of events or jobs that are chained and integrated with each other in sequence.
+- Every job in pipe line has some dependency on one or more other jobs.
+
+-  This "Pipeline as Code" would be written to a Jenkinsfile and checked into a project’s source control repository
+- Create job using "Pipeline" project.
+- goto "Advanced Project Options -> Pipeline" catagory. than will get 2 options. 1) pipeline script, 2) pipeline script from SCM
+- if we seelct 1st option than we can write the script there only, if you select 2nd than need to create "Jenkinsfile" in GIT repository and write below 
+  code in that file
+
+Syntax:
+
+pipeline {
+    agent any 
+
+    stages {
+        stage('Build') { 
+            steps { 
+                sh 'make' 
+            }
+        }
+        stage('Test'){
+            steps {
+                sh 'make check'
+                junit 'reports/**/*.xml' 
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'make publish'
+            }
+        }
+    }
+}
+
+Ex:1
+
+node {
+  // Mark the code checkout 'stage'....
+  stage 'Stage Checkout'
+
+  // Checkout code from repository and update any submodules
+  checkout scm
+  sh 'git submodule update --init'  
+
+  stage 'Stage Build'
+
+  //branch name from Jenkins environment variables
+  echo "My branch is: ${env.BRANCH_NAME}"
+
+  def flavor = flavor(env.BRANCH_NAME)
+  echo "Building flavor ${flavor}"
+
+  //build your gradle flavor, passes the current build number as a parameter to gradle
+  sh "./gradlew clean assemble${flavor}Debug -PBUILD_NUMBER=${env.BUILD_NUMBER}"
+
+  stage 'Stage Archive'
+  //tell Jenkins to archive the apks
+  archiveArtifacts artifacts: 'app/build/outputs/apk/*.apk', fingerprint: true
+
+  stage 'Stage Upload To Fabric'
+  sh "./gradlew crashlyticsUploadDistribution${flavor}Debug  -PBUILD_NUMBER=${env.BUILD_NUMBER}"
+}
+
+// Pulls the android flavor out of the branch name the branch is prepended with /QA_
+@NonCPS
+def flavor(branchName) {
+  def matcher = (env.BRANCH_NAME =~ /QA_([a-z_]+)/)
+  assert matcher.matches()
+  matcher[0][1]
+}
+
+Ex2:
+
+node('java8') {
+
+  stage('Configure') {
+    env.PATH = "${tool 'maven-3.3.9'}/bin:${env.PATH}"
+  }
+
+  stage('Checkout') {
+    git 'https://github.com/bertjan/spring-boot-sample'
+  }
+
+  stage('Build') {
+    sh 'mvn -B -V -U -e clean package'
+  }
+
+  stage('Archive') {
+    junit allowEmptyResults: true, testResults: '**/target/**/TEST*.xml'
+  }
+
+}
+
+
+
+- selct SCM File location (GIT, svn)
+- use "Global Tool Configuration" for give path to differnt tools Like JDK, Git, Ant, Maven, Docker etc
+- save job
+-> Pipeline Defination 
+- agent : 
+- tools : 
+- stage :
+- steps :
+- post :
+
+---------------------------------
+- Every resource having user name, password in organization. Those credentials can be used in Jenkins. 
+  That is called SSO (single sign on). For that we can use LDAP in Jenkins
+
+- when we install "Roles Strategy Plugin, we will get the "Roles based Strategy" in cofigure globel security-> 
+  authorization.Now than ony you will get "Manage and Assign Roles" 
+
+- Deploy plugin (Deploy to container)used to deploy war/ear to tomcat/JBOSS. when you install this plugin, 
+  you will get the option "Deploy war/ear to a container" in "add post build action"
+
+- Delivery pipeline plugin.
+- Build pipeline
+
+----------------------------
+For AWS
+
+- Open instance & login -> create user for jenkines slave -> $useradd -s /bin/bash jenkins -> $passwd jenkins -> give the sudo access for jenkins user
+  go to $visudo -> add line in that -> jenkins ALL =(all) NOPASSWD:ALL -> save & came out -> login with jenkines user -> $su jenkins
+   -> copy link locaton from "slave.jar" in jenkins page -> go to -> AWS instance -> $wget <paste the location here> ->   
+ 
+
+
+
+
+

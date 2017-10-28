@@ -1,0 +1,21 @@
+1) Change Host name using UI
+	$ sudo nmtui
+2) install "vim" command
+	$  yum -y install vim
+3) Run rpm file
+	$ rpm -i package-1.2.3.rpm (install)
+	$ rpm -e package-1.2.3.rpm (remove)
+4) get all commands you used
+	$ history | more
+	$ history | less
+	$ history | tail
+
+4) generate ssh key & copy this key to remote host
+
+$ ssh-keygen
+$ ssh-copy-id -i root@192.168.33.22
+
+6) $ ps waux | grep java
+7) $ rpm -qa | grep ntp
+
+

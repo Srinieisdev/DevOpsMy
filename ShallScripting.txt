@@ -1,0 +1,141 @@
+Intraductio: 
+Unix architecture
+Hardware -> Kernal -> Shell -> application -> user
+Shell Program is called collection of unix commands
+-------------------
+Unix folder structure (Case sensitive operating system)
+/ (it called root, under / (root) following folders are) 
+/bin (bin means Binary,it contains all executable files ),
+/boot (it contains all bootable related information), 
+/dev (means device, it contains all device drivers ) , 
+/etc (admin related configuration like super user, disk etc), 
+/home (users & sub users related), 
+/user (default directory, if you install new software it will come into this)
+--------------
+Unix file system organization available into physical & logical blocks: Logical block classified into 4 main blocks. 1) boot block (BB) , 
+2) Super Block (SB), 3) Inode block ( I means index) (IB), 4) Data Block (DB) 
+--------------
+
+Different types of shell available mainly 3
+1)	The born shell (called as stranded shell, prompt is $,  execution command is sh )
+2)	C shell (Prompt is % , execution command is Csh)
+3)	Corn shell (Prompt is $, command is ksh)
+export command is make it globle for any shell
+Ex: $ export variable_name
+	Get login users
+$ users
+	Get login users count
+$ users | wc - w
+------------------------
+1) check your system support shells
+[root@localhost ~]# cat /etc/shells
+/bin/sh
+/bin/bash
+/sbin/nologin
+/bin/dash
+==> variable declaration
+Ex: var1 "srini"
+Var2="nivas"
+echo "$var1 $var2"
+
+
+2) sh - is born shell, bash is born again shell, this standard shell
+3) check where bash shell is located
+[root@localhost ~]# which bash
+/bin/bash
+4) now create hello world script file, create file 
+# touch hello.sh
+5) now check file , give rw permissions
+# ls -al
+# chmod 777 hello.sh
+6) write small script in hello.sh for ask your name input:
+#! /bin/bash
+echo "Enter Name:"
+read
+echo "Name: $REPLY"
+7) create passpara.sh file below script
+#! /bin/bash
+echo $1 $2 $3 ' > echo $1 $2 $3'
+i/p : # ./passpara.sh sri ni vasa
+o/p : sri ni vasa  > echo $1 $2 $3
+8) create array & print
+#! /bin/bash
+args=("$@")
+echo ${args[0]} ${args[1]} ${args[2]}  (pring array values index wise)
+echo $@  (print all array vales)
+echo $# (print no.of parameters )
+--) Array Ex
+Ex:
+#!/bin/sh
+
+NAME[0]="Zara"
+NAME[1]="Qadir"
+NAME[2]="Mahnaz"
+NAME[3]="Ayan"
+NAME[4]="Daisy"
+echo "First Method: ${NAME[*]}"
+echo "Second Method: ${NAME[@]}"
+Run: $./test.sh
+Res: 
+First Method: Zara Qadir Mahnaz Ayan Daisy
+Second Method: Zara Qadir Mahnaz Ayan Daisy
+9) By expanding bash command with -x, shell allows us to see commands that the shell is executing. (Troubleshooting a shell script)
+Ex: bash -x filename
+10) Shell Parameters
+Parameters = Function
+$1-$9 =	Represent positional parameters for arguments one to nine
+${10}-${n} = Represent positional parameters for arguments after nine
+$0 =	Represent name of the script
+$* =	Represent all the arguments as a single string
+$@ =	Same as $*, but differ when enclosed in (")
+$# =	Represent total number of arguments
+$$ =	PID of the script
+$? =	Represent last return code
+11) search string in file 
+# grep "nivas" print1.sh
+12) Command-Line Arguments Ex
+File Name : test.sh
+#!/bin/sh
+
+echo "File Name: $0"
+echo "First Parameter : $1"
+echo "Second Parameter : $2"
+echo "Quoted Values: $@"
+echo "Quoted Values: $*"
+echo "Total Number of Parameters : $#"
+==> $./test.sh srini vas
+Result:::
+File Name : ./test.sh
+First Parameter : srini
+Second Parameter : vas
+Quoted Values: sruni vas
+Quoted Values: srini vas
+Total Number of Parameters : 2
+
+13)Special Parameters $* and $@
+There are special parameters that allow accessing all the command-line arguments at once. $* and $@ both will act the same unless they are enclosed in double quotes, ""
+We can write the shell script as shown below to process an unknown number of commandline arguments with either the $* or $@ special parameters
+Ex:
+#!/bin/sh
+
+for TOKEN in $*
+do
+   echo $TOKEN
+done
+
+Run: $./test.sh Srini vas 10 Years Old
+
+Res: 
+srini
+vas
+10
+Years
+Old
+
+14) check login users 
+
+who | wc -l
+
+15) SSH port forwarding
+16) what is a ZOMBIE PROCESS
+17) 

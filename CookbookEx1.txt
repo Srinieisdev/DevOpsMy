@@ -1,0 +1,20 @@
+execute "install mysql server" do
+        command "yum -y install mysql-server"
+end
+
+execute 'start mysql server' do
+        command '/etc/init.d/mysqld start'
+end
+
+execute 'create an account' do
+        command 'mysql -u root < /home/vagrant/create.sql'
+end
+
+execute 'download db' do
+        command 'wget http://192.168.33.13:8080/job/leadapp_build/lastSuccessfulBuild/artifact/src/database/schema.sql -P /home/vagrant/'
+end
+
+
+execute 'create db' do
+        command 'mysql -u harry -pharry < /home/vagrant/schema.sql'
+end

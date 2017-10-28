@@ -1,0 +1,3 @@
+Docker Work Flow
+1) Developer will define all the application and it's dependecy and reqiremnets in file, that file will call "docker file".
+2) Docker File - Describes step to create a docker image.  

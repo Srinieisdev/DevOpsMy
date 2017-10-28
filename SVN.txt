@@ -1,0 +1,6 @@
+> svnadmin create eisproj1
+> svn co "http://192.168.33.10:81/subversion/"
+> svn add -force .
+OR
+> svn add filename
+> svn ci -m"commited proj al files"

@@ -1,0 +1,26 @@
+1) Download “jdk-8u141-linux-x64.tar.gz” file in /opt/
+2) chmod 777 jdk-8u141-linux-x64.tar.gz
+3) tar xzf jdk-8u141-linux-x64.tar.gz
+4) created folder “jdk1.8.0_141” 
+5) cd /opt/jdk1.8.0_141/
+6) alternatives --install /usr/bin/java java /opt/jdk1.8.0_141/bin/java 2
+7) alternatives --config java
+8) Enter to keep the current selection[+], or type selection number: 1
+9) alternatives --install /usr/bin/jar jar /opt/jdk1.8.0_141/bin/jar 2
+10) alternatives --install /usr/bin/javac javac /opt/jdk1.8.0_141/bin/javac 2
+11) alternatives --set jar /opt/jdk1.8.0_141/bin/jar
+12) alternatives --set javac /opt/jdk1.8.0_141/bin/javac
+13) export JAVA_HOME=/opt/jdk1.8.0_131
+14) export JRE_HOME=/opt/jdk1.8.0_131/jre
+15) export PATH=$PATH:/opt/jdk1.8.0_131/bin:/opt/jdk1.8.0_131/jre/bin
+
+---------------------------------------------------------
+
+uninstall Mysql
+
+1) yum remove mysql mysql-server
+2) mv /var/lib/mysql /var/lib/mysql_old_backup
+3) rpm -qa | grep mysql (then display installed package, then remove package yum remove command)
+4) Ex:  yum remove mysql57-community-release-el6-9.noarch
+Ex:  yum remove mysql-libs-5.1.73-8.el6_8.x86_64
+5) 

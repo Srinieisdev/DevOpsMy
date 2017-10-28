@@ -1,0 +1,119 @@
+-> GIT is the repository
+-> github is where the repository placed.
+-> Create users in github
+- create organisation
+- craete individual account for each one and invite into organisation.
+- give the permistions to them
+
+1) craete account in https://github.com/  
+2) Crate Repository in https://github.com/
+3) Click “Clone or Download” button “copy to clipboard” the URL
+3) Crate new folder in in any drive. Ex: F:/DevOpsClass1/GITHubProj
+4) Open GitBash in “F:/ DevOpsClass1/GITHubProj” path 
+5) Administrator@SRINIEIS MINGW64 /f/DevOpsClass1/GITHubProj
+$ git init
+$ git config user.name "srini"
+$ git config user.email "srini@gmail.com"
+6) Now get
+Administrator@SRINIEIS MINGW64 /f/DevOpsClass1/GITHubProj (master)
+7) Take repository
+$ git remote add origin "https://github.com/SrinivasaRaoYS/DevopsProj1.git"
+$ git pull origin master
+8)Now check the status
+
+$ git status
+On branch master
+nothing to commit, working tree clean
+
+9) Crate new file (Srini.txt) add some text into that file, now check the status
+
+$ git status
+On branch master
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        Srini1.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+$ git add Srini1.txt
+$ git status
+On branch master
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        new file:   Srini1.txt
+
+$ git commit -m "Srini text file added"
+10) Create multiple file in working area, use command for add multiple files (-a commit all uncommited files)
+$ git add -A
+$ git commit -a -m "Adding srini2 srini 3 and srini1 modified"
+11) Above commands for all the work saved in local repository, now we have to push local repository code into GitHub repository using bellow command.
+$ git push origin master
+11) Create Branches 
+$ git branch srinibranch1
+12) if you want go one branch to another branch use bellow commend, now going master branch to “srinibranch1”
+Admi1nistrator@SRINIEIS MINGW64 /f/DevOpsClass1/GITHubProj (master)
+$ git checkout srinibranch1
+Switched to branch 'srinibranch1'
+
+Administrator@SRINIEIS MINGW64 /f/DevOpsClass1/GITHubProj (srinibranch1)
+13) create, add, commit one file in “srinibranch1” branch, now you can see master branch file and “sruinibranch1” file
+14) now Switched to master branch, now you can’t see “srinibranch1” branch files, use merge command for your branch work send to master.
+$ git merge srinibranch1
+15) now you can see “srinibranch1” branch files in master branch
+16) rebase command, this command same as merge
+Administrator@SRINIEIS MINGW64 /f/DevOpsClass1/GITHubProj (master)
+$ git rebase srinibranch1
+17) Crate ssh key
+Administrator@SRINIEIS MINGW64 /f/DevOpsClass1/GITHubProj (master)
+$ ssh-keygen
+Administrator@SRINIEIS MINGW64 /f/DevOpsClass1/GITHubProj (master)
+$ cat /c/Users/Administrator/.ssh/id_rsa.pub
+-	Copy ssh key from console, go to your account in github.com, settings-> SSH and GPG keys -> new sshkey -> give title “ssh1” and paste coped ssh key from console and “add SSH key” button, activate ssh key from console using below command, after activate ssh key key icon changed it as green colour 
+
+Administrator@SRINIEIS MINGW64 /f/DevOpsClass1/GITHubProj (master)
+$ ssh -T git@github.com
+The authenticity of host 'github.com (192.30.253.113)' can't be established.
+RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
+Are you sure you want to continue connecting (yes/no)? y
+Please type 'yes' or 'no': yes
+Warning: Permanently added 'github.com,192.30.253.113' (RSA) to the list of known hosts.
+Hi SrinivasaRaoYS! You've successfully authenticated, but GitHub does not provide shell access
+
+Administrator@SRINIEIS MINGW64 /f/DevOpsClass1/GITHubProj (master)
+$ ssh -T git@github.com
+Hi SrinivasaRaoYS! You've successfully authenticated, but GitHub does not provide shell access.
+18) Put branch and branch code into github.com repository
+Administrator@SRINIEIS MINGW64 /f/DevOpsClass1/GITHubProj (master)
+$ git checkout srinibranch1
+Switched to branch 'srinibranch1'
+Administrator@SRINIEIS MINGW64 /f/DevOpsClass1/GITHubProj (srinibranch1)
+$ git push origin srinibranch1
+19) revert back to previous versions, create new file add some text to “rever.txt”   
+Administrator@SRINIEIS MINGW64 /f/DevOpsClass1/GITHubProj (master)
+$ git add revert.txt
+Administrator@SRINIEIS MINGW64 /f/DevOpsClass1/GITHubProj (master)
+$ git commit -m "revert comm"
+20) go to  “rever.txt”    add some text and commit the code 
+Administrator@SRINIEIS MINGW64 /f/DevOpsClass1/GITHubProj (master)
+$ git commit -a -m "revert comm modified 2nd time"
+Go to 
+$ git log
+Copy 1st 8 letters of commit version “0161e07f” (this is 1st committed version)
+
+(commit 8602397fd71080f2c43e8119b7b22dcafa540639 (HEAD -> master)
+Author: srini <srini@gmail.com>
+Date:   Thu Jun 22 15:24:02 2017 +0530
+
+    revert comm modified 2nd time
+
+commit 0161e07f8bd5ec626e258ef99c2b7b38562e8997
+Author: srini <srini@gmail.com>
+Date:   Thu Jun 22 15:20:23 2017 +0530
+
+    revert comm )
+Administrator@SRINIEIS MINGW64 /f/DevOpsClass1/GITHubProj (master)
+$ git checkout 0161e07f revert.txt
+
+$ git checkout --revert.txt
