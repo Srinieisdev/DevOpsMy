@@ -1,10 +1,11 @@
-28/10/2017
+28/10/2017 10 PM
 -> GIT is the repository
--> github is where the repository placed.
+->It is online storage of GIT repositories
 -> Create users in github
 - create organisation
 - craete individual account for each one and invite into organisation.
 - give the permistions to them
+- Working directory - Local work space (non Bare repository), staging area (Index (OR) buffer area), repository area - github (Bare repository) 
 
 
 1) craete account in https://github.com/  
@@ -144,8 +145,21 @@ $git reset --soft  => Move only HEAD pointer
 $git reset --mixed => Move the HEAD pointer & reset the staging area 
 $git reset --hard  => Move the HEAD pointer, reset the staging area and working tree to the new head 
 
-#if you want to reset one file
-$ git checkout HEAD -- test1.txt
+
+
+
+#If you want revert back to the file for previous things. This file committed to repository. we can revert back (last modifications only) 
+ any files from repository.
+$git revert <shalsham number>
+
+
+# If we want get back to the particular file. (Ex: file1 – add 1 line & commit, - add 2nd line & commit, -add 3rd line & commit, 
+  -delete 3rd line & commit, -again add 3rd line & commit, Now I want file when I add 2nd line, latest HEAD point is 2nd file commit id)
+  just we are going to one location to another location.
+$ git checkout <commitid> (git checkout currentbranch@@commitid (it will look for your given id in ))
+- Now head poison is showing 2nd file commitid, if you want to latest head point now check out brach
+$ git checkout <branchName> (git checkout branchName@@latest commit) (use for go to another branch) 
+
 
 -----------------
 
@@ -180,6 +194,8 @@ $ git stash -u
 # Bring stashed work back to the working directory
 $ git stash pop
 
+
+
 git rm
 Remove files or directories from the working index (staging area). With git rm, there are two options to keep in mind: force and cached. Running the command with force deletes the file. 
 The cached command removes the file from the working index. When removing an entire directory, a recursive command is necessary.
@@ -195,6 +211,12 @@ $ git rm -r --cached <directory name>
 
 # To delete an entire directory (force):
 $ git rm -r -f <file name>
+
+- Check the untacked files (just -n means just Show the untracked files)
+$ git clean -n
+- Now remove the untracked files (-f means It will remove force )
+$ git clean -f
+
 
 # tag is the snapshot of the revison number
 $ git tag --list
