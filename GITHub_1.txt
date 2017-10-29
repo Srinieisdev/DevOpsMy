@@ -1,11 +1,13 @@
 28/10/2017 10 PM
 -> GIT is the repository
-->It is online storage of GIT repositories
+-> GITHUB is online storage of GIT repositories
 -> Create users in github
-- create organisation
-- craete individual account for each one and invite into organisation.
-- give the permistions to them
-- Working directory - Local work space (non Bare repository), staging area (Index (OR) buffer area), repository area - github (Bare repository) 
+-> create organisation
+-> craete individual account for each one and invite into organisation.
+-> give the permistions to them
+=> Working directory - Local work space (non Bare repository), 
+=> Staging area (Index (OR) buffer area), 
+=> Repository area - github (Bare repository) 
 
 
 1) craete account in https://github.com/  
