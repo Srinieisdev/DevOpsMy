@@ -10,7 +10,7 @@ Maven Documentation
    package
    deploy on server
  - Ant Vs Maven
-	actions are defined in ant	-- in Maven you say wht to build not how to build
+	actions are defined in ant	-- in Maven you say what to build not how to build
 	sequence is defined in ant	-- how to build is defined in maven build life cycle
 	No default directory layout	-- standard directory struture follows
 	Ant can follow you 		-- You need to follow maven

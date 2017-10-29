@@ -24,16 +24,6 @@ artifactId: meetings
 version: 1.0
 package: src
  Y: : Y
-
-# now build success downloaded sample project
-
-> mvn clean
-> mvn compile
-> mvn test
-> mvn test-compile
-# mvn install command to cretae jar file.
-> mvn install   
-
 -------------
 Default (or Build) Lifecycle
 •	validate - validate the project is correct and all necessary information is available
