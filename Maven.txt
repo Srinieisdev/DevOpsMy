@@ -80,7 +80,7 @@ A Maven Build Profile can be activated in various ways.
     Based on environment variables (User/System variables).
     OS Settings (for example, Windows family).
     Present/missing files.
---------------
+------------------------
 Maven CLI Options
 -D,--define <arg>		= Define a system property
 -P,--activate-profiles <arg>	= Comma-delimited list of profiles to activate
