@@ -37,7 +37,7 @@ For Ubuntu:
 	
 - Run below command to create organisation id
 	
-	sudo chef-server-ctl org-create eis "EIS India Pvt Ltd." --association_user srinivas--filename /home/harry/srinivas-validator.pem
+	sudo chef-server-ctl org-create eis "EIS India Pvt Ltd." --association_user srinivas--filename /home/vagrant/srinivas-validator.pem
 	
 	(sudo chef-server-ctl org-create scm-training "SCMTraining Software, Inc." --association_user sarahjohn --filename /home/vagrant/scm-validator.pem
 	
@@ -57,7 +57,8 @@ $ chef-server-ctl install opscode-push-jobs-server
 $ chef-server-ctl reconfigure
 $ opscode-push-jobs-server-ctl reconfigure
 
-- Reporting: Use Reporting to keep track of what happens during every chef-client runs across all of the infrastructure being managed by Chef. Run Reporting with Chef management console to view reports from a web user interface.
+- Reporting: Use Reporting to keep track of what happens during every chef-client runs across all of the infrastructure being managed by Chef. 
+  Run Reporting with Chef management console to view reports from a web user interface.
 - On the Chef server, run:
 
 $ chef-server-ctl install opscode-reporting
@@ -91,8 +92,6 @@ sudo yum update
 192.168.33.21 chefworkstation.eis.com
 192.168.33.20 chefserver.eis.com
 
-
-
 - Install the development kit with a normal user having sudo access
 - Download the chef SDK in a CentOS instace
   wget https://opscode-omnibus-packages.s3.amazonaws.com/el/6/x86_64/chefdk-0.10.0-1.el6.x86_64.rpm
@@ -104,6 +103,14 @@ sudo yum update
 	chef-client version: 12.5.1
 	berks version: 4.0.1
 	kitchen version: 1.4.2
+----------- New One ------------
+Chef Development Kit Version: 2.3.4
+chef-client version: 13.4.19
+delivery version: master (73ebb72a6c42b3d2ff5370c476be800fee7e5427)
+berks version: 6.3.1
+kitchen version: 1.17.0
+inspec version: 1.36.1
+-----------
 
 - Login to your chef server with above credentials
 	https://192.168.33.50   (sarahjohn/sarah123)
@@ -220,7 +227,7 @@ cookbook 'java_se', '~> 8.144.0'
 	knife cookbook upload learn_chef_httpd
 	knife cookbook list
 	
-		knife bootstrap  192.168.33.32 --ssh-user vagrant --ssh-password 'vagrant' --sudo --use-sudo-password --node-name node32 --run-list 'recipe[learn_chef_httpd]'  
+  knife bootstrap  192.168.33.32 --ssh-user vagrant --ssh-password 'vagrant' --sudo --use-sudo-password --node-name node32 --run-list 'recipe[learn_chef_httpd]'  
     Note: Make sure the node hosts file has the server dns pointed to the server IP
 -- Install tomat
 	knife cookbook site download tomcat7
@@ -350,8 +357,8 @@ re
 	
 Environments:
 -------------
-	In some ways, environments are fairly similar to roles. They are also used to differentiate different servers, but instead of differentiating by the function of the server, 
-	environments differentiate by the phase of development that a machine belongs to.
+	In some ways, environments are fairly similar to roles. They are also used to differentiate different servers, but instead of 
+	differentiating by the function of the server, environments differentiate by the phase of development that a machine belongs to.
 
 Create an Environments
 	mkdir ~/chef-repo/environments
@@ -421,10 +428,7 @@ knife bootstrap  192.168.33.22 --ssh-user vagrant --ssh-password 'vagrant' --sud
 
 ####################
 
-	
-
-
-	 knife bootstrap  192.168.33.32 --ssh-user vagrant --ssh-password 'vagrant' --sudo --use-sudo-password --node-name node32 --run-list 'role[web_server]'
+knife bootstrap  192.168.33.32 --ssh-user vagrant --ssh-password 'vagrant' --sudo --use-sudo-password --node-name node32 --run-list 'role[web_server]'
 
 knife bootstrap  192.168.33.22 --ssh-user vagrant --ssh-password 'vagrant' --sudo --use-sudo-password --node-name chefnode1 --run-list 'role[srinibook1]'
 	 
