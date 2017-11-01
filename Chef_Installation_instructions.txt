@@ -22,7 +22,7 @@ For Ubuntu:
 
 - Run below command to create user /etc/chef
 
-	chef-server-ctl user-create srinivas1 srini Y srinivas1@gmail.com srini123 --filename /home/vagrant/srinivas1.pem
+	chef-server-ctl user-create srinivas srini Y srinivas@gmail.com srini123 --filename /home/vagrant/srinivas.pem
 	chef-server-ctl user-create venkat sap Y venkat@gmail.com venkat --filename /home/vagrant/venkat.pem
 	
 	(sudo chef-server-ctl user-create sarahjohn sarah john sarah.john@gmail.com sarah123 --filename /home/vagrant/sarah.pem
@@ -37,7 +37,7 @@ For Ubuntu:
 	
 - Run below command to create organisation id
 	
-	chef-server-ctl org-create eis1 "EIS India Pvt Ltd." --association_user srinivas1 --filename /home/vagrant/srinivas1-validator.pem
+	chef-server-ctl org-create eis "EIS India Pvt Ltd." --association_user srinivas --filename /home/vagrant/srinivas-validator.pem
 
 	chef-server-ctl org-create veneis "ven EIS India Pvt Ltd." --association_user venkat  --filename /home/vagrant/venkat-validator.pem
 	
@@ -231,12 +231,15 @@ cookbook 'java_se', '~> 8.144.0'
 	knife cookbook upload learn_chef_httpd
 	knife cookbook list
 	
-  knife bootstrap  192.168.33.32 --ssh-user vagrant --ssh-password 'vagrant' --sudo --use-sudo-password --node-name node32 --run-list 'recipe[learn_chef_httpd]'  
+  knife bootstrap  192.168.33.32 --ssh-user vagrant --ssh-password 'vagrant' --sudo --use-sudo-password --node-name node32 --run-list 'recipe[learn_chef_httpd]' 
+
+knife bootstrap INSTANCE_IP_ADDRESS -N INSTANCE_NAME -x USER_NAME --sudo --run-list "recipe[apache2]"
+ Ex: knife bootstrap 192.168.33.14 -x root 
     Note: Make sure the node hosts file has the server dns pointed to the server IP
 -- Install tomat
 	knife cookbook site download tomcat7
 	knife cookbook upload tomcat7
-	kinfe cookbook list
+	knife cookbook list
 	
 -- Important concepts/keywords
 package- Used to manage packages on a node

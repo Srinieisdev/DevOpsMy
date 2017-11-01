@@ -11,7 +11,7 @@ Simple Storage service & Elastic block store
 
 Elasic File System
 - Could be mounted to multiple EC2 at the same time
-- Could be mounted to on premise server as well (over VPN ot DirectConnect)
+- Could be mounted to on premise server as well (over VPN (or) DirectConnect)
 
 ----------------------
 - Refuse the connection If try to connect to EC2 instance using SSH. It means Port 22 is not lessening from outside. 
