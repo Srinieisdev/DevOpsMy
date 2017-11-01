@@ -1,3 +1,13 @@
 Docker Work Flow
 1) Developer will define all the application and it's dependecy and reqiremnets in file, that file will call "docker file".
 2) Docker File - Describes step to create a docker image.  
+
+------------------------------------------
+
+Docker swarm: 
+
+	It is technique to create and maintain a cluster of docker engines.
+	Service deployed in any node can be accessed on other nodes in the same cluster.
+	
+	Features: 
+	high availability of services, auto load balancing, decentralized access, easy to scale-up deployments, rolling updates.
