@@ -216,6 +216,34 @@ Successfully verified certificates from `chefserver.eis.com'
     chef-validator
    
 ****************** Working on Workstation to upload a cookbook to server and deploy on node **********************************************************
+=>Add node to chef server from workstation. use command in workstation. Now it will install chef clinet in node(/etc/chef) and get all the information from node.
+  It will show everything on attribute section I webpage
+  $ knife bootstrap  192.168.33.14 -x root -P password -N "checfnode1.com" 
+  Syn: $ knife bootstrap  <ip Address> -x <user name> -P password -N <node name>
+- we can check the node 
+- $ knife node show <nodename>
+
+=> Create cookbook and upload into the server. you are in /root/chef-repo 
+-  $ knife cookbook create sampletest (latest version will work : $ chef generate cookbook sampletest )
+- Now it will create in "/root/chef-repo/cookbooks/sampletest" now go to "/root/chef-repo/cookbooks/sampletest/recipes". Open "default.rb". Write simple script
+-------
+file 'sample.txt' do
+        content 'hello world'
+end
+-------
+-  now upload sampletest cookbook from "/root/chef-repo/"
+- $ knife cookbook upload sampletest
+- $ knife cookbook list
+- Uploading any cookbook will take the version 0.1.0 first time
+- add runlist to node 
+- $ knife node run_list add checfnode1.com "recipe[sampletest]"
+- Syn: knife node run_list add <node name> "recipe[<cookbook name>]"
+- ssh-keygen -t rsa
+
+
+
+
+
 - we can download cookbooks from https://supermarket.chef.io/ 
 - search cookbook what you want 
 Ex: if we want java than go to above link search "java", it will show the result like
@@ -256,6 +284,10 @@ execute- Execute a command on the node
 cron- Edit an existing cron file on the node
 
 ---------------------------------------------
+
+
+
+
 -- Roles and Environments:
 	Nice explanation form digital ocean below
 https://www.digitalocean.com/community/tutorials/how-to-use-roles-and-environments-in-chef-to-control-server-configurations
@@ -433,7 +465,7 @@ Apply the role to node and bootstrap the node:-
 ################
 add node to chefserver from chef work satation
 
-knife bootstrap  192.168.33.22 --ssh-user vagrant --ssh-password 'vagrant' --sudo --use-sudo-password --node-name chefnode1
+knife bootstrap  192.168.33.14 --ssh-user vagrant --ssh-password 'vagrant' --sudo --use-sudo-password --node-name checfnode1
 
 ####################
 
