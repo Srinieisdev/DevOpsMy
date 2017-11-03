@@ -218,12 +218,7 @@ Successfully verified certificates from `chefserver.eis.com'
 ****************** Working on Workstation to upload a cookbook to server and deploy on node **********************************************************
 =>Add node to chef server from workstation. use command in workstation. Now it will install chef clinet in node(/etc/chef) and get all the information from node.
   It will show everything on attribute section I webpage
-<<<<<<< HEAD
   $ knife bootstrap  192.168.33.17 -x root -P password -N chefnode1.com
-=======
-  $ knife bootstrap  192.168.33.14 -x root -P password -N "checfnode1.com" 
-  $ knife bootstrap  192.168.33.14 -x root -P password -N "checfnode1.com"
->>>>>>> dc457d855d53d32f00d2114ca3a543cd28193d27
   Syn: $ knife bootstrap  <ip Address> -x <user name> -P password -N <node name>
 - When you use bootstrap command for add node that time "/home/vagrant/srinivas-validator.pem" file copy  from the server to node "/etc/chef/validator.pem" (changed it as "validator.pem")
 - when we use chef-client it will authenticate to the server using this files
