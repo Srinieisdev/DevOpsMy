@@ -219,9 +219,16 @@ Successfully verified certificates from `chefserver.eis.com'
 =>Add node to chef server from workstation. use command in workstation. Now it will install chef clinet in node(/etc/chef) and get all the information from node.
   It will show everything on attribute section I webpage
   $ knife bootstrap  192.168.33.14 -x root -P password -N "checfnode1.com" 
+  $ knife bootstrap  192.168.33.14 -x root -P password -N "checfnode1.com"
   Syn: $ knife bootstrap  <ip Address> -x <user name> -P password -N <node name>
+- When you use bootstrap command for add node that time "/home/vagrant/srinivas-validator.pem" file copy  from the server to node "/etc/chef/validator.pem" (changed it as "validator.pem")
+- when we use chef-client it will authenticate to the server using this files
+
 - we can check the node 
 - $ knife node show <nodename>
+- $ knife node show <nodename> -l
+- $ knife search node "platform:centos" (it will give which node having centos OS)
+- $ knife ssh "role:webserver" "uptime" -x root
 
 => Create cookbook and upload into the server. you are in /root/chef-repo 
 -  $ knife cookbook create sampletest (latest version will work : $ chef generate cookbook sampletest )
@@ -239,6 +246,13 @@ end
 - $ knife node run_list add checfnode1.com "recipe[sampletest]"
 - Syn: knife node run_list add <node name> "recipe[<cookbook name>]"
 - ssh-keygen -t rsa
+- If knife command not found in chef workstation export knife bin path.
+  $ export PATH=$PATH:/opt/chefdk/bin/ 
+- $ knife role show <rolename>
+- & knife search role "run_list:recipe\[apache\]"
+- 2 roles having Same recipe ex apache and both roles are assigned to node1. Now apache will run only one-time 2nd time will skip it  
+- Single role having multiple recipe, will run only one
+ 
 
 
 
@@ -402,6 +416,10 @@ Environments:
 	differentiating by the function of the server, environments differentiate by the phase of development that a machine belongs to.
 
 Create an Environments
+- check default Environments
+	$ knife environment show _default
+	$ knife environment list
+
 	mkdir ~/chef-repo/environments
 	cd ~/chef-repo/environments
 	Same as role we can create it with ruby DSL or json file using knife directly on server
