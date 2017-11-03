@@ -245,18 +245,17 @@ end
 - $ knife node run_list add checfnode1.com "recipe[sampletest]"
 - Syn: knife node run_list add <node name> "recipe[<cookbook name>]"
 - ssh-keygen -t rsa
-<<<<<<< HEAD
+
 - $ knife node delete < nade name>
-=======
+
 - If knife command not found in chef workstation export knife bin path.
   $ export PATH=$PATH:/opt/chefdk/bin/ 
 - $ knife role show <rolename>
 - & knife search role "run_list:recipe\[apache\]"
 - 2 roles having Same recipe ex apache and both roles are assigned to node1. Now apache will run only one-time 2nd time will skip it  
 - Single role having multiple recipe, will run only one
- 
->>>>>>> dc457d855d53d32f00d2114ca3a543cd28193d27
-
+- We can check the cookbooks in the node whatever assigned to that
+- $ cd /var/chef/cache/cookbooks
 
 
 
