@@ -1,6 +1,19 @@
-=> A Resource represents a piece of infrastructure and its desired state, such as a package that should be installed, a service that should be running, 
-   or a file that should be generated. A block of Resource can be considered as a Recipe
-***** Chef-Server setup:  (Linux)*********
+=> A Resource represents a piece of infrastructure and its desired state, such as a package that should be installed, 
+   a service that should be running, or a file that should be generated. A block of Resource can be considered as a Recipe
+List of resources
+		package: Used to manage packages on a node
+		service: Used to manage services on a node
+		user: Manage users on the node
+		group: Manage groups
+		template: Manage files with embedded ruby templates
+		cookbook_file: Transfer files from the files subdirectory in the cookbook to a location on the node
+		file: Manage contents of a file on node
+		directory: Manage directories on node
+		execute: Execute a command on the node
+		cron: Edit an existing cron file on the node
+
+******************************************** Chef-Server setup:  (Linux)****************************************************************************
+
 -chef-server instance should have atleast 1gb RAM
 -/etc/hosts should contain only one entry of IP address
 - add hostname /etc/hosts and /etc/sysconfig/network
@@ -92,11 +105,11 @@ sudo yum update
  Use Chef management console to manage data bags, attributes, run-lists, roles, environments, and cookbooks from a web user interface
  
  
-*********************************************Chef-Work station setup: ( Linux)*******************************************************************************
-- add chef server host name & IP in /etc/hosts like below
+*********************************************Chef-Work station setup: ( Linux)*********************************************************************
 
-192.168.33.21 chefworkstation.eis.com
-192.168.33.20 chefserver.eis.com
+- add chef server host name & IP in /etc/hosts like below
+ 192.168.33.21 chefworkstation.eis.com
+ 192.168.33.20 chefserver.eis.com
 
 - Install the development kit with a normal user having sudo access
 - Download the chef SDK in a CentOS instace
@@ -203,7 +216,7 @@ Successfully verified certificates from `chefserver.eis.com'
   $knife ssl check
   $knife ssl fetch
   $knife client list
-
+--------------------
   FOR MAC: 
   https://opscode-omnibus-packages.s3.amazonaws.com/mac_os_x/10.8/x86_64/chefdk-0.4.0-1.dmg
   Login to https://vapps1.konylabs.net/  ( harrypotter/harry123)
@@ -214,29 +227,29 @@ Successfully verified certificates from `chefserver.eis.com'
   $knife ssl fetch
   $knife client list
     chef-validator
-   
+---------------------   
 ****************** Working on Workstation to upload a cookbook to server and deploy on node **********************************************************
-=>Add node to chef server from workstation. use command in workstation. Now it will install chef clinet in node(/etc/chef) and get all the information from node.
+=>Add node to chef server from workstation. use command in workstation. Now it will install chef clinet in node(/etc/chef) 
+  and get all the information from node.
   It will show everything on attribute section I webpage
   $ knife bootstrap  192.168.33.17 -x root -P password -N chefnode1.com
   Syn: $ knife bootstrap  <ip Address> -x <user name> -P password -N <node name>
-- When you use bootstrap command for add node that time "/home/vagrant/srinivas-validator.pem" file copy  from the server to node "/etc/chef/validator.pem" (changed it as "validator.pem")
-- when we use chef-client it will authenticate to the server using this files
-
+- When you use bootstrap command for add node that time "/home/vagrant/srinivas-validator.pem" file copy  from the server to node 
+  "/etc/chef/validator.pem" (changed it as "validator.pem").when we use chef-client it will authenticate to the server using this files
 - we can check the node 
 - $ knife node show <nodename>
-- $ knife node show <nodename> -l
-- $ knife search node "platform:centos" (it will give which node having centos OS)
+- $ knife node show <nodename> -l (show all the information)
 - $ knife ssh "role:webserver" "uptime" -x root
 
 => Create cookbook and upload into the server. you are in /root/chef-repo 
 -  $ knife cookbook create sampletest (latest version will work : $ chef generate cookbook sampletest )
-- Now it will create in "/root/chef-repo/cookbooks/sampletest" now go to "/root/chef-repo/cookbooks/sampletest/recipes". Open "default.rb". Write simple script
--------
-file 'sample.txt' do
-        content 'hello world'
-end
--------
+- Now it will create in "/root/chef-repo/cookbooks/sampletest" now go to "/root/chef-repo/cookbooks/sampletest/recipes". 
+  Open "default.rb". Write simple script
+-----------------
+	file 'sample.txt' do
+        	content 'hello world'
+	end
+------------------
 -  now upload sampletest cookbook from "/root/chef-repo/"
 - $ knife cookbook upload sampletest
 - $ knife cookbook list
@@ -252,13 +265,11 @@ end
   $ export PATH=$PATH:/opt/chefdk/bin/ 
 - $ knife role show <rolename>
 - & knife search role "run_list:recipe\[apache\]"
+- $ knife search node "platform:centos" (it will give which node having centos OS)
 - 2 roles having Same recipe ex apache and both roles are assigned to node1. Now apache will run only one-time 2nd time will skip it  
 - Single role having multiple recipe, will run only one
 - We can check the cookbooks in the node whatever assigned to that
 - $ cd /var/chef/cache/cookbooks
-
-
-
 
 - we can download cookbooks from https://supermarket.chef.io/ 
 - search cookbook what you want 
@@ -278,8 +289,7 @@ cookbook 'java_se', '~> 8.144.0'
 	knife cookbook list
 	
   knife bootstrap  192.168.33.32 --ssh-user vagrant --ssh-password 'vagrant' --sudo --use-sudo-password --node-name node32 --run-list 'recipe[learn_chef_httpd]' 
-
-knife bootstrap INSTANCE_IP_ADDRESS -N INSTANCE_NAME -x USER_NAME --sudo --run-list "recipe[apache2]"
+	knife bootstrap INSTANCE_IP_ADDRESS -N INSTANCE_NAME -x USER_NAME --sudo --run-list "recipe[apache2]"
  Ex: knife bootstrap 192.168.33.14 -x root 
     Note: Make sure the node hosts file has the server dns pointed to the server IP
 -- Install tomat
@@ -287,22 +297,7 @@ knife bootstrap INSTANCE_IP_ADDRESS -N INSTANCE_NAME -x USER_NAME --sudo --run-l
 	knife cookbook upload tomcat7
 	knife cookbook list
 	
--- Important concepts/keywords
-package- Used to manage packages on a node
-service- Used to manage services on a node
-user- Manage users on the node
-group- Manage groups
-template- Manage files with embedded ruby templates
-cookbook_file- Transfer files from the files subdirectory in the cookbook to a location on the node
-file- Manage contents of a file on node
-directory- Manage directories on node
-execute- Execute a command on the node
-cron- Edit an existing cron file on the node
-
 ---------------------------------------------
-
-
-
 
 -- Roles and Environments:
 	Nice explanation form digital ocean below
@@ -381,8 +376,6 @@ machine is supposed to do. What responsibilities does it have and what software 
 		$knife node run list add <node name> 'name of list'
 		$knife node run list add webservernode  'recipe[apache]'
 
-
-
 -> Assign the role to a node
 	Check the list if nodes
 	$knife node list
@@ -408,19 +401,21 @@ machine is supposed to do. What responsibilities does it have and what software 
 	knife search "role:web_server AND chef_environment:_default" -a name
 	$knife role show <node name>
 	$knife role show webservernode
-
-
-re
 	
 Environments:
 -------------
 	In some ways, environments are fairly similar to roles. They are also used to differentiate different servers, but instead of 
 	differentiating by the function of the server, environments differentiate by the phase of development that a machine belongs to.
+	Default environment is _default this is read-only we can’t modify that  
 
 Create an Environments
 - check default Environments
-	$ knife environment show _default
+	$ knife environment show <environment name>
 	$ knife environment list
+	
+	By default, node is _default environment, if we want change nodes environment to our created environment 
+	$ knife node environment_set <node name> <environment name> 
+
 
 	mkdir ~/chef-repo/environments
 	cd ~/chef-repo/environments
@@ -435,7 +430,7 @@ Create an Environments
 			"nginx": "<= 1.1.0",
 			"apt": "= 0.0.1"
 		  },
-		  "json_class": "Cheff:Environment",
+		  "json_class": "Cheff::Environment",
 		  "chef_type": "environment",
 		  "default_attributes": {
 		  },
@@ -475,7 +470,6 @@ Create an Environments
 --> Assign an environment to node
 	$knife node edit node32
 	
-	
 Apply the role to node and bootstrap the node:-
 ----------------------------------------------
 -> Make sure you have uploaded all required cookbooks to chef-server
@@ -492,12 +486,38 @@ knife bootstrap  192.168.33.14 --ssh-user vagrant --ssh-password 'vagrant' --sud
 knife bootstrap  192.168.33.32 --ssh-user vagrant --ssh-password 'vagrant' --sudo --use-sudo-password --node-name node32 --run-list 'role[web_server]'
 
 knife bootstrap  192.168.33.22 --ssh-user vagrant --ssh-password 'vagrant' --sudo --use-sudo-password --node-name chefnode1 --run-list 'role[srinibook1]'
-	 
+------------------	 
 Data bags:
---------=
+===================
+Databag creation:
+1. create databag using below command
+	$ knife data bag create s_passwords
+2. Now create a directory data_bags under chef-repo
+	$ mkdir data_bags
+3. Inside data_bags directy create another data bag item like below
+	mkdir data_bags/s_passwords/s_sql_pwd.json
+	add belwo contents to the item
+	{
+		"id": "s_sql_pwd",
+		"password": "Test123"
+	}
+4. Now upload your databag to server
+	knife data bag from file s_passwords s_sql_pwd.json
+5. Check your databag
+	knife data bag show s_passwords s_sql_pwd
+6. Now declare as below in your recipe to load the databag
 
-check data bag
+	data = data_bag_item('s_passwords', 's_sql_pwd')
+	file '/home/vagrant/hi.txt' do
+		content data['password']
+	end
+	or 
+	file '/home/vagrant/hi.txt' do
+		content #{data['password']}
+	end
+-------------------------
 
+- check data bag
 $ knife data bag list
 
 	A data bag is a collection of bits of JSON called data bag items, indexed by an ID, that Chef allows us to use and search in our recipes. 
@@ -517,7 +537,7 @@ $ knife data bag list
 	-----------------------
 	How to use databags in recipies
 	
-	--------------
+	-----------------------
 	sites = data_bag("wp-sites")
 	sites.each do |site|
 		opts = data_bag_item("wp-sites", site)
@@ -527,7 +547,3 @@ $ knife data bag list
 			action :create
 		  end
 	----------------------
-
--------------------	
-
-

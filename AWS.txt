@@ -76,6 +76,7 @@ AWS management services:
 
 AWS security services:
 1) IAM (identification authentication management tool): It provides enhanced security and identity management for your AWS account
+   Create new user from IAM service. Select check box “generate an access key for each user”, now you will get “Access key id”, “secret Access key id”.
 2) KMS (create and manage encryption keys to encrypt your data)
 
 AWS application services:
