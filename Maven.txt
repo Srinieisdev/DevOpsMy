@@ -14,8 +14,8 @@ Choose a number: 6:
 
 # choose 6 and it will ask below:
 
-Define value for property 'groupId': com.eis.erp
-Define value for property 'artifactId': meetings
+Define value for property 'groupId': com.eis.erp <company name>
+Define value for property 'artifactId': meetings <Project Name>
 Define value for property 'version' 1.0-SNAPSHOT: : 1.0
 Define value for property 'package' com.eis.erp: : src
 Confirm properties configuration:

@@ -318,3 +318,15 @@ $ git stash save
 $ git bisect start
 $ git bisect bad
 $ git bisect good 0
+
+- When pushing to GitHub, you'll receive a warning or error message if you either add a new file or update an existing file that is larger than 50 MB.
+- Git Large File Storage (LFS) replaces large files such as audio samples, videos, datasets, and graphics with text pointers inside Git, 
+  while storing the file contents on a remote server like GitHub.com
+- $ git lfs install
+- Select the file types you'd like Git LFS to manage (or directly edit your .gitattributes). You can configure additional file extensions at anytime.
+- $ git lfs track "*.psd"
+- Make sure .gitattributes is tracked
+- $ git add .gitattributes
+- $ git add file.psd
+- $ git commit -m "Add design file"
+- $ git push origin master

@@ -1,3 +1,4 @@
+
    ############## Instalation in Windows ################
 1) Download and install Jenkins using .exe file
 2) Run Jenkins service from windows services.
@@ -78,7 +79,7 @@ node('java8') {
   That is called SSO (single sign on). For that we can use LDAP in Jenkins
 
 - when we install "Roles Strategy Plugin, we will get the "Roles based Strategy" in cofigure globel security-> 
-  authorization.Now than ony you will get "Manage and Assign Roles" 
+  authorization. Now than ony you will get "Manage and Assign Roles" 
 
 - Deploy plugin (Deploy to container)used to deploy war/ear to tomcat/JBOSS. when you install this plugin, 
   you will get the option "Deploy war/ear to a container" in "add post build action"
@@ -90,11 +91,5 @@ node('java8') {
 For AWS
 
 - Open instance & login -> create user for jenkines slave -> $useradd -s /bin/bash jenkins -> $passwd jenkins -> give the sudo access for jenkins user
-  go to $visudo -> add line in that -> jenkins ALL =(all) NOPASSWD:ALL -> save & came out -> login with jenkines user -> $su jenkins
+  go to $vi sudo -> add line in that -> jenkins ALL =(all) NOPASSWD:ALL -> save & came out -> login with jenkines user -> $su jenkins
    -> copy link locaton from "slave.jar" in jenkins page -> go to -> AWS instance -> $wget <paste the location here> ->   
- 
-
-
-
-
-

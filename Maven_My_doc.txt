@@ -57,7 +57,7 @@ Maven Documentation
    Makes your POM smaller and easier
    easier to understand for any one
    easier to integrate plugins
-    Src/main/java -- Java source code
+    	src/main/java -- Java source code
 	   /main/resources -- other resources application needs
 	   /main/filters -- resource filters in the form of property files, used run time
 	   /main/config  -- configuration file
@@ -176,12 +176,14 @@ Maven Documentation
 		</repositories>
 	
 -   Trnasitive dependency
-	In maven 1.0 you would have defined each and every jar and its version to download. but in newer maven version you no need to worry about this as maven will take care of downloading the dependencies of your dependent library files
+	In maven 1.0 you would have defined each and every jar and its version to download. but in newer maven version you no need to worry 
+	about this as maven will take care of downloading the dependencies of your dependent library files
 https://support.sonatype.com/entries/21283268-Configure-Maven-to-Deploy-to-Nexus
 -   Site Generation and Reporting
 	Generates the website under src/site/index.html which includes all the web pages of that app
 	
--   Build profiles: - we can build the project for a given profile by passing mvn -P test  with a profile name or   we can mention the profile name in settings.xml
+-   Build profiles: - we can build the project for a given profile by passing mvn -P test  with a profile name or   
+	we can mention the profile name in settings.xml
 		<profiles>
 			<profile>
 				<id>test</id>
