@@ -1,5 +1,6 @@
 => A Resource represents a piece of infrastructure and its desired state, such as a package that should be installed, 
    a service that should be running, or a file that should be generated. A block of Resource can be considered as a Recipe
+=> This is the power of mixing plain Ruby with Chef Domain Specific Language (DSL).
 List of resources
 		package: Used to manage packages on a node
 		service: Used to manage services on a node

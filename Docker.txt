@@ -1,3 +1,20 @@
+$ docker build -t myubuntu2  .   (here . means current directory OR give path).
+$ docker run -it myubuntu2
+$ docker history-it myubuntu2
+
+$docker run --name myubuntuhost -it ubuntu /bin/bash
+If you want to go to ubuntu terminal use
+$docker start myubuntuhost
+$docker attach myubuntuhost  
+$docker run --name myubuntuhost -d ubuntu (-d demonised mode )
+
+build images from our customised container 
+
+$docker commit mytemplate
+$docker tag  b4a9955d6ea8  myimage 
+$docker run --it myimage /bin/bash
+
+
 Docker Work Flow
 1) Developer will define all the application and it's dependecy and reqiremnets in file, that file will call "docker file".
 2) Docker File - Describes step to create a docker image.  
