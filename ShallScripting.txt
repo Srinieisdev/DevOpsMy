@@ -138,4 +138,3 @@ who | wc -l
 
 15) SSH port forwarding
 16) what is a ZOMBIE PROCESS
-17) 
