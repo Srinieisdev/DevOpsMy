@@ -69,7 +69,7 @@ For Ubuntu:
 - Use Chef management console to manage data bags, attributes, run-lists, roles, environments, and cookbooks from a web user interface.
 $ chef-server-ctl install chef-manage
 $ chef-server-ctl reconfigure
-$ x`
+$ 
 
 - Chef Push Jobs: Use Chef push jobs to run jobs—an action or a command to be executed—against nodes independently of a chef-client run. On the Chef server, run:
 $ yum install opscode-manage
