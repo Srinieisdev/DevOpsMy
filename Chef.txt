@@ -550,6 +550,65 @@ $ knife data bag list
 		  end
 	----------------------
 
-How to check the chsf services ruining on the server
-how to check the ststus of chef server.
-what is use of knofe.rb file in server.
+- How to check the what are the chef services ruining on the chef server
+-- The status subcommand is used to show the status of all services available to the Chef server. 
+   The results will vary based on the configuration of a given server. This subcommand has the following syntax
+
+[root@localhost ~]# chef-server-ctl status
+run: bookshelf: (pid 1560) 174s; run: log: (pid 1558) 174s
+run: nginx: (pid 1464) 174s; run: log: (pid 1459) 174s
+run: oc_bifrost: (pid 1466) 174s; run: log: (pid 1462) 174s
+run: oc_id: (pid 1465) 174s; run: log: (pid 1460) 174s
+run: opscode-erchef: (pid 1569) 174s; run: log: (pid 1568) 174s
+run: opscode-expander: (pid 1507) 174s; run: log: (pid 1346) 175s
+run: opscode-solr4: (pid 1444) 174s; run: log: (pid 1443) 174s
+run: postgresql: (pid 1048) 175s; run: log: (pid 1047) 175s
+run: rabbitmq: (pid 1467) 174s; run: log: (pid 1463) 174s
+run: redis_lb: (pid 1545) 174s; run: log: (pid 1544) 174s
+
+where
+
+    run: is the state of the service (run: or down:)
+    service_name: is the name of the service for which status is returned
+    (pid 12345) is the process identifier
+    12345s is the uptime of the service, in seconds
+
+For example:
+
+$ down: opscode-erchef: (pid 35546) 10s
+
+
+-----------
+For example:
+
+$ chef-server-ctl stop
+
+will return something similar to:
+
+ok: down: nginx: 393s, normally up
+ok: down: opscode-chef: 391s, normally up
+ok: down: opscode-erchef: 391s, normally up
+ok: down: opscode-expander: 390s, normally up
+ok: down: opscode-expander-reindexer: 389s, normally up
+ok: down: opscode-solr4: 389s, normally up
+ok: down: postgresql: 388s, normally up
+ok: down: rabbitmq: 388s, normally up
+ok: down: redis_lb: 387s, normally up
+------------------
+- what is use of knife.rb file in work sation.
+-- it is Knife Configuration File.
+
+Ex:
+current_dir = File.dirname(__FILE__)
+log_level                :info
+log_location             STDOUT
+node_name                "srinivas"
+client_key               "#{current_dir}/srinivas.pem"
+chef_server_url          "https://chefser.com/organizations/eis"
+cookbook_path            ["#{current_dir}/../cookbooks"]
+
+---
+ This is a Ruby DSL to set configuration parameters for Knife's general options. The default location for this file is
+ ~/.chef/knife.rb. If multiple Chef repositories are used, per-repository configuration files can be created. A per repository
+ configuration file must be .chef/knife.rb in the base directory of the Chef repository. For example, ~/Development/chef-repo/.chef/knife.rb
+
