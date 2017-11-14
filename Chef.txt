@@ -353,6 +353,7 @@ machine is supposed to do. What responsibilities does it have and what software 
 	The above role with json will directly creates on server, so no need to upload
 	upload it using below command to chef server
 		$knife role from file web_server.json
+		$knife node run_list add NODE_NAME 'role[ROLE_NAME]'
 	
 	2) Using chef DSL script
 		vi web_server.rb

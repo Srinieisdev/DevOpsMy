@@ -26,9 +26,11 @@ ade1673adf784429b05747c5f33d6609)
 #################
 
 
+-> Install Role-based Authorization Strategy plug in (for manage user roles) - From manage jenkins -> manage plugins
+-> now we will get "Role-Based Strategy"  selct this option in Configure Global Security -> Enable security -> in "Access Control"
+-> Now we will get "Manage and Assign Roles" in "manage jenkins"
+
 pipeline plugin
-	
-Role-based Authorization Strategy plug in (for manage user roles)
 
 -> Pipeline
 - Pipeline is a work flow with group of events or jobs that are chained and integrated with each other in sequence.
