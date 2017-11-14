@@ -95,3 +95,8 @@ For AWS
 - Open instance & login -> create user for jenkines slave -> $useradd -s /bin/bash jenkins -> $passwd jenkins -> give the sudo access for jenkins user
   go to $vi sudo -> add line in that -> jenkins ALL =(all) NOPASSWD:ALL -> save & came out -> login with jenkines user -> $su jenkins
    -> copy link locaton from "slave.jar" in jenkins page -> go to -> AWS instance -> $wget <paste the location here> ->   
+
+--------------------------
+what is upstream downstream jobs in jenkins
+
+

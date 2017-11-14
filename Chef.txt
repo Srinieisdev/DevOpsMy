@@ -549,3 +549,7 @@ $ knife data bag list
 			action :create
 		  end
 	----------------------
+
+How to check the chsf services ruining on the server
+how to check the ststus of chef server.
+what is use of knofe.rb file in server.
