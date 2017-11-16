@@ -49,7 +49,7 @@ AWS database services:
 3)DynamoDB: non-relational data base management service. Scaling this DB. We can store unstructured data in this DB. 
 4)ElastiCache: set up, manage and scale a distributed cache-in environment in the cloud. If user send the request to DB multiple times. 
   Now ElastiCache store the result set and send back to user. Now request not connected the DB multiple times.   
-5) RedShift: fully managed petabyte-scale data warehouse service.
+5)RedShift: fully managed petabyte-scale data warehouse service.
 - EC2 instance and DB instance in same VPC Security group 
 
 AWS networking services:
